@@ -7,22 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.alura.gerenciador.impl.AcaoImpl;
-import br.com.alura.gerenciador.modelo.Banco;
-import br.com.alura.gerenciador.modelo.Empresa;
 
-public class MostraEmpresa implements AcaoImpl {
+public class NovaEmpresaForm implements AcaoImpl {
 
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		Integer id = Integer.valueOf(request.getParameter("id") );
+		return "forward:formNovaEmpresa.jsp";
 		
-		Banco banco = new Banco();
-		Empresa empresa = banco.buscaEmpresaId(id);
-		
-		request.setAttribute("empresa", empresa);
-
-		return "forward:formAlteraEmpresa.jsp";
-
 	}
 
 }

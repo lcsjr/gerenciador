@@ -11,21 +11,25 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.com.alura.gerenciador.impl.AcaoImpl;
 
-@WebServlet("/entrada")
-public class UnicaEntradaServlet extends HttpServlet {
+@WebServlet("/"+ControllerServlet.nomeController)
+public class ControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	public static final String nomeController = "controllerServlet";
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String acao = request.getParameter("acao");
 		String saida = null;
-
+		
+		// NOVO CODIGO
 		try {
-			saida = ((AcaoImpl) Class.forName("br.com.alura.gerenciador.acao."+acao).newInstance()).execute(request, response);			 
+			
+			saida = ((AcaoImpl) Class.forName("br.com.alura.gerenciador.acao."+acao).newInstance()).execute(request, response);
+			
 		} catch (ClassNotFoundException|InstantiationException|IllegalAccessException e) {
 			throw new ServletException(e);
 		}		
-
+		System.out.println(saida);
 		String[] tipoSaida = saida.split(":");
 		if(tipoSaida[0].equals("forward")) {
 			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/view/"+tipoSaida[1]);
@@ -33,23 +37,24 @@ public class UnicaEntradaServlet extends HttpServlet {
 		} else if (tipoSaida[0].equals("redirect")) {
 			response.sendRedirect(tipoSaida[1]);
 		}
+
 		
-		
-// Codigo substituido por interface 		
-//		if (acao.equals("ListaEmpresas")) {
-//			saida = new ListaEmpresas().execute(request, response);
-//		}else if (acao.equals("NovaEmpresa")) {
-//			saida = new NovaEmpresa().execute(request, response);
-//		}else if (acao.equals("RemoveEmpresa")) {
-//			saida = new RemoveEmpresa().execute(request, response);
-//		}else if (acao.equals("AlteraEmpresa")) {
-//			saida = new AlteraEmpresa().execute(request, response);
-//		}else if (acao.equals("MostraEmpresa")) {
-//			saida = new MostraEmpresa().execute(request, response);
-//		}else if (acao.equals("NovaEmpresaForm")) {
-//			saida = new NovaEmpresaForm().execute(request, response);
-//		}
-		
+		/*
+		// Codigo substituido por interface 		
+		if (acao.equals("ListaEmpresas")) {
+			saida = new ListaEmpresas().execute(request, response);
+		}else if (acao.equals("NovaEmpresa")) {
+			saida = new NovaEmpresa().execute(request, response);
+		}else if (acao.equals("RemoveEmpresa")) {
+			saida = new RemoveEmpresa().execute(request, response);
+		}else if (acao.equals("AlteraEmpresa")) {
+			saida = new AlteraEmpresa().execute(request, response);
+		}else if (acao.equals("MostraEmpresa")) {
+			saida = new MostraEmpresa().execute(request, response);
+		}else if (acao.equals("NovaEmpresaForm")) {
+			saida = new NovaEmpresaForm().execute(request, response);
+		}	
+		*/	
 
 	}
 

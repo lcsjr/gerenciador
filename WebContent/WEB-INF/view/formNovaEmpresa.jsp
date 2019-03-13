@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:url value="/entrada" var="linkServletEntrada"/>
+<%@ page import="br.com.alura.gerenciador.servlet.ControllerServlet"%>
+<c:url value="/${ControllerServlet.nomeController}" var="linkServletControllerServlet"/>
 
 <!DOCTYPE html>
 <html>
@@ -9,7 +10,7 @@
 </head>
 <body>
 
-	<form action="${linkServletEntrada}" method="post">
+	<form action="${linkServletControllerServlet}" method="post">
 	
 		Nome: <input type="text" name="nome"  />
 		Data Abertura: <input type="text" name="data"  />

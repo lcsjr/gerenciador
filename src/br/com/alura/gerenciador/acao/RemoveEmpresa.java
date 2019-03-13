@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.com.alura.gerenciador.impl.AcaoImpl;
 import br.com.alura.gerenciador.modelo.Banco;
+import br.com.alura.gerenciador.servlet.ControllerServlet;
 
 public class RemoveEmpresa implements AcaoImpl {
 
@@ -17,7 +18,7 @@ public class RemoveEmpresa implements AcaoImpl {
 		Banco banco = new Banco();
 		banco.removeEmpresa(id);
 		
-		return "redirect:entrada?acao=ListaEmpresas";
+		return "redirect:"+ControllerServlet.nomeController+"?acao=ListaEmpresas";
 	}
 
 }

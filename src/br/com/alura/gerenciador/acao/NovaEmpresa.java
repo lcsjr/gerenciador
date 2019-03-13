@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.alura.gerenciador.impl.AcaoImpl;
 import br.com.alura.gerenciador.modelo.Banco;
 import br.com.alura.gerenciador.modelo.Empresa;
+import br.com.alura.gerenciador.servlet.ControllerServlet;
 
 public class NovaEmpresa implements AcaoImpl {
 
@@ -34,9 +35,8 @@ public class NovaEmpresa implements AcaoImpl {
 		Banco banco = new Banco();
 		banco.adiciona(empresa);
 		
-		request.setAttribute("empresa", empresa);
-		
-		return "redirect:entrada?acao=ListaEmpresas";
+		request.setAttribute("empresa", empresa);	
+		return "redirect:"+ControllerServlet.nomeController+"?acao=ListaEmpresas";
 		
 		
 		
